@@ -1,3 +1,49 @@
+# AutoRound Quantization Toolkit
+
+A compact collection of notebooks and scripts for weight-only quantization using iterative rounding techniques. This repository contains production-focused pipelines to quantize transformer models, export them in common formats, and run inference with minimal memory overhead.
+
+**What it does:**
+- **Purpose:** Reduce model size and VRAM usage while preserving accuracy.
+- **Approach:** Iterative weight tuning with group-wise quantization and 16-bit activations.
+- **Outputs:** Exportable quantized checkpoints compatible with common inference tools.
+
+**Contents:**
+- **Notebooks:** Ready-to-run Jupyter notebooks for quantization experiments.
+- **Docs:** Implementation notes and examples in the `ReadMe/` folder.
+
+**Quickstart**
+- **Requirements:** Python 3.8+, PyTorch (CUDA recommended for quantization), Jupyter.
+- **Install (example):**
+```
+pip install -r requirements.txt
+# or
+pip install transformers torch auto-round huggingface-hub
+```
+- **Run a notebook:** Launch Jupyter and open the provided `.ipynb` files to reproduce quantization and export flows.
+
+**Usage (inference, generic)**
+```
+from transformers import AutoModelForCausalLM, AutoTokenizer
+
+tokenizer = AutoTokenizer.from_pretrained("<quantized-model-id>")
+model = AutoModelForCausalLM.from_pretrained("<quantized-model-id>", device_map="auto")
+inputs = tokenizer("Hello world", return_tensors="pt")
+print(model.generate(**inputs, max_new_tokens=50))
+```
+
+**Export formats:** AutoRound-native, AWQ, GPTQ (format availability depends on the notebook and export scripts).
+
+**Where to look next:**
+- Implementation notes and model-specific instructions: [ReadMe/](ReadMe/)
+- Quantization notebooks (in root): files ending with `.ipynb`
+
+**License:** Apache-2.0
+
+For detailed tuning parameters, calibration notes, and export steps, see the markdown files in `ReadMe/` and the notebooks in the repository.
+
+---
+
+Last updated: February 2026
 # AutoRound Quantization
 
 Comprehensive model quantization project using **Intel's AutoRound** algorithm to create production-ready 4-bit quantized versions of language models. This project demonstrates advanced weight-only quantization techniques optimized for both text and vision-language models.
@@ -17,7 +63,7 @@ The project produces quantized models in multiple formats optimized for differen
 TUNING_CONFIG = {
     "group_size": 128,              # Fine-grained quantization control
     "sym": True,                    # Symmetric quantization for better performance
-    "iters": 1000,                  # High-precision weight tuning
+    "iters": 600,                  # High-precision weight tuning
     "nsamples": 512,                # Extensive calibration samples
     "batch_size": 8,                # Optimized for high-end GPUs
     "seqlen": 2048,                 # Long context support
@@ -61,7 +107,7 @@ The project provides two ready-to-use notebooks:
 Run these notebooks to:
 - Load base models from Hugging Face
 - Configure quantization parameters
-- Perform weight tuning (1000 iterations)
+- Perform weight tuning (600 iterations)
 - Export to multiple formats (AutoRound, AWQ, GPTQ)
 - Push quantized models to Hugging Face Hub
 
@@ -100,7 +146,7 @@ tokenizer = AutoTokenizer.from_pretrained("model_id")
 ## 📈 Performance Metrics
 
 ### Quantization Accuracy
-- **Iterations**: 1000 (production-grade weight tuning)
+- **Iterations**: 600 (production-grade weight tuning)
 - **Calibration Samples**: 512 (comprehensive accuracy preservation)
 - **Compression Ratio**: ~60% size reduction
 - **Memory Savings**: 4x reduction compared to full precision
@@ -138,7 +184,7 @@ AutoRound is an advanced weight-only quantization algorithm developed by Intel t
 - Achieves state-of-the-art accuracy on large language models
 
 ### Why This Approach?
-- **Accuracy**: 1000 iterations of weight tuning preserves model quality
+- **Accuracy**: 600 iterations of weight tuning preserves model quality
 - **Speed**: Reduced model size enables faster inference
 - **Memory**: 4x memory reduction for deployment
 - **Compatibility**: Multiple export formats for different hardware
