@@ -11,7 +11,7 @@ tags:
 - 4-bit
 - auto-round
 pipeline_tag: image-text-to-text
-model_type: qwen2_vl
+model_type: qwen3_vl
 ---
 
 # Qwen3-VL-8B-Instruct-W4A16-AutoRound-GPTQ
@@ -23,7 +23,7 @@ Unlike standard GPTQ conversions which rely on a greedy layer-wise algorithm, th
 
 ### Key Highlights
 *   **Best-in-Class Quality**: tuned for 1000 iterations to preserve the model's complex visual reasoning capabilities.
-*   **Uncompromised Vision**: The visual encoder (Vision Tower) is kept in **BF16 (Unquantized)** to ensure no degradation in OCR, chart reading, or spatial analysis.
+*   **Uncompromised Vision**: The visual encoder (Vision Tower) is kept in **FP16 (Unquantized)** to ensure no degradation in OCR, chart reading, or spatial analysis.
 *   **Broad Compatibility**: Works with `AutoGPTQ`, `Transformers`, and older `vLLM` versions that support GPTQ.
 
 ### Technical Specifications
@@ -32,7 +32,7 @@ Unlike standard GPTQ conversions which rely on a greedy layer-wise algorithm, th
 | **Quantization Format** | GPTQ |
 | **Quantization Scheme** | W4A16 (4-bit weights, 16-bit activations) |
 | **Optimization Algo** | Intel AutoRound (Symmetric, Group Size 128) |
-| **Vision Tower** | BF16 (Original Precision) |
+| **Vision Tower** | FP16 (Original Precision) |
 | **Model Size** | ~5.5 GB (vs ~16GB Original) |
 | **VRAM Requirement** | ~6-8 GB for Inference |
 
@@ -112,9 +112,9 @@ print(f"Model Response:\n{output_text}")
 
 ## Performance & Benchmarks
 
-This quantized model aims to match the performance of the BF16 original model while reducing memory usage by nearly 70%.
+This quantized model aims to match the performance of the FP16 original model while reducing memory usage by nearly 70%.
 
-*   **VRAM Usage**: reduced from **~16GB** (BF16) to **~5.5GB** (GPTQ).
+*   **VRAM Usage**: reduced from **~16GB** (FP16) to **~5.5GB** (GPTQ).
 *   **Throughput**: Higher token generation speed on memory-bandwidth limited GPUs (like RTX 3090, 4090, L40).
 
 ## Acknowledgements

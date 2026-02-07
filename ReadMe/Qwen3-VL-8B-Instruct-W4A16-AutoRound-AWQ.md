@@ -11,7 +11,7 @@ tags:
 - 4-bit
 - vllm
 pipeline_tag: image-text-to-text
-model_type: qwen2_vl
+model_type: qwen3_vl
 ---
 
 # Qwen3-VL-8B-Instruct-W4A16-AutoRound-AWQ
@@ -19,7 +19,7 @@ model_type: qwen2_vl
 ## Model Overview
 This model is the **AWQ (Activation-aware Weight Quantization)** export of [Qwen/Qwen3-VL-8B-Instruct](https://huggingface.co/Qwen/Qwen3-VL-8B-Instruct).
 
-It combines the **speed of AWQ** with the **accuracy of AutoRound**. The weights were fine-tuned for 1000 steps to ensure the 4-bit degradation is negligible. The vision tower remains in full precision (BF16) to maintain top-tier performance on OCR and visual tasks.
+It combines the **speed of AWQ** with the **accuracy of AutoRound**. The weights were fine-tuned for 1000 steps to ensure the 4-bit degradation is negligible. The vision tower remains in full precision (FP16) to maintain top-tier performance on OCR and visual tasks.
 
 ### Key Features
 - **High Performance**: Optimized for `vLLM` serving and `Transformers`.
