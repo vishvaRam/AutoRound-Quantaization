@@ -2,18 +2,16 @@ import json
 import os
 import shutil
 
-
-from huggingface_hub import HfApi, create_repo, get_token, snapshot_download
+from huggingface_hub import HfApi, create_repo, snapshot_download
 from safetensors import safe_open
 from safetensors.torch import save_file
-
 
 # -------------------------------------------------------------
 # Configuration
 # -------------------------------------------------------------
-BASE_MODEL_ID = "Qwen/Qwen3.8-27B"                              # Unquantized base model
-QUANT_MODEL_ID = "Vishva007/Qwen3.8-27B-W4A16-AutoRound"        # Quantized repo to fix
-NEW_REPO_ID = "Vishva007/Qwen3.8-27B-W4A16-AutoRound"
+BASE_MODEL_ID = "Qwen/Qwen3.5-9B"                              # Unquantized base model
+QUANT_MODEL_ID = "Vishva007/Qwen3.5-9B-W4A16-AutoRound-GPTQ"        # Quantized repo to fix
+NEW_REPO_ID = "Vishva007/Qwen3.5-9B-W4A16-AutoRound-GPTQ"
 
 
 LOCAL_BASE_DIR = "./base_model"
