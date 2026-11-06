@@ -1,0 +1,6 @@
+vllm serve ./AutoRound-4b/local_model-4b-w2g32 \
+  --served-model-name LLM
+  --trust-remote-code \
+  --max-model-len 8096 \
+  --gpu-memory-utilization 0.70 \
+  --port 8000
